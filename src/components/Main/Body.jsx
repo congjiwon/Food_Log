@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../api/posts";
 import { useQuery } from "react-query";
 import Button from "../Button";
+import noimage from "../../assets/noimage.jpg";
 
 function Body() {
   const navigate = useNavigate();
@@ -27,7 +28,9 @@ function Body() {
                 }}
               >
                 <ContentImgBox>
-                  <ContentImg src={post.imgUrl}></ContentImg>
+                  <ContentImg
+                    src={post.imgUrl ? post.imgUrl : noimage}
+                  ></ContentImg>
                 </ContentImgBox>
                 <ContentInfoBox>
                   <Writer>{post.writer}</Writer>

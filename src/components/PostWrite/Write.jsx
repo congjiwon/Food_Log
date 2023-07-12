@@ -7,6 +7,8 @@ import { useMutation, useQueryClient } from "react-query";
 import shortid from "shortid";
 import currentTime from "../feature/CurrentTime";
 import Select from "../PostWrite/Select";
+import noimage from "../../assets/noimage.jpg";
+
 function Write() {
   const navigate = useNavigate();
   const [writer, setWriterHandle] = useInput();

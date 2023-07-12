@@ -52,7 +52,7 @@ function DetailPage() {
           <Time>{foundPost.date}</Time>
         </WriteInfoBox>
         <ContentsBox>
-          <Img src={foundPost.imgUrl}></Img>
+          {foundPost.imgUrl && <Img src={foundPost.imgUrl}></Img>}
           <Content>
             <RestaurantInfoBox>
               {foundPost.restaurantName} - {foundPost.restaurantLocation}
