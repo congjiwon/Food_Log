@@ -1,26 +1,24 @@
 import React from "react";
 import { styled } from "styled-components";
-function Button({ name, right }) {
-  return <Btn style={{ right: right }}>{name}</Btn>;
+function Button(props) {
+  return <Btn onClick={props.onClick}>{props.name}</Btn>;
 }
 
 export default Button;
 
 const Btn = styled.button`
-  background-color: #9e6629;
-  color: white;
-  width: 100px;
+  background-color: #97919171;
+  color: black;
+  width: 80px;
   height: 40px;
   margin-top: 10px;
-  position: absolute;
-  bottom: 0;
-  border-radius: 5px;
-  margin: 5px;
+  margin-left: 10px;
   border: none;
+  border-radius: 5px;
   &:hover {
     cursor: pointer;
-    background-color: #e6d0b9;
-    color: black;
+    background-color: #979191f1;
+    color: white;
     border: none;
   }
 `;

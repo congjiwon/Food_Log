@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { editPost, getPosts } from "../../api/posts";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Select from "../PostWrite/Select";
+import Button from "../Button";
 
 function Edit() {
   const params = useParams();
@@ -36,7 +37,9 @@ function Edit() {
     console.log(e.target.files[0]);
     saveImgFile();
   };
-
+  const canelHandle = () => {
+    navigate("/");
+  };
   const saveImgFile = () => {
     const file = testRef.current.files[0];
     const reader = new FileReader();
@@ -145,15 +148,8 @@ function Edit() {
         />
         {/* <img src={imgUrl}></img> */}
         <BtnArea>
-          <Btn type="submit">수정하기</Btn>
-          <Btn
-            type="submit"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            취소하기
-          </Btn>
+          <Button name={"수정하기"}></Button>
+          <Button onClick={canelHandle} name={"취소하기"}></Button>
         </BtnArea>
       </form>
     </WriteLayout>
@@ -199,23 +195,6 @@ const BtnArea = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-`;
-
-const Btn = styled.button`
-  background-color: #97919171;
-  color: black;
-  width: 80px;
-  height: 40px;
-  margin-top: 10px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 5px;
-  &:hover {
-    cursor: pointer;
-    background-color: #979191f1;
-    color: white;
-    border: none;
-  }
 `;
 
 const WriteLayout = styled.div`

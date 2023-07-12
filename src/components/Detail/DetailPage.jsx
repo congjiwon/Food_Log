@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getPosts, delPost } from "../../api/posts";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Button from "../Button";
 
 function DetailPage() {
   const navigate = useNavigate();
@@ -55,10 +56,12 @@ function DetailPage() {
             </GradeBox>
             {foundPost.content}
           </Content>
-          <BtnArea>
-            <Btn onClick={deletePost}>삭제하기</Btn>
-            <Btn onClick={modifyPost}> 수정하기</Btn>
-          </BtnArea>
+          <DeleteBtnBox>
+            <Button onClick={deletePost} name={"삭제하기"}></Button>
+          </DeleteBtnBox>
+          <EditBtnBox>
+            <Button onClick={modifyPost} name={"수정하기"}></Button>
+          </EditBtnBox>
         </ContentsBox>
       </DetailPostBox>
     </DetailLayout>
@@ -98,28 +101,19 @@ const Time = styled.span`
   position: absolute;
   right: 10px;
 `;
-const BtnArea = styled.div`
+
+const EditBtnBox = styled.div`
   position: absolute;
   bottom: 0;
   right: 0px;
   margin: 10px;
 `;
 
-const Btn = styled.button`
-  background-color: #97919171;
-  color: black;
-  width: 80px;
-  height: 40px;
-  margin-top: 10px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 5px;
-  &:hover {
-    cursor: pointer;
-    background-color: #979191f1;
-    color: white;
-    border: none;
-  }
+const DeleteBtnBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 90px;
+  margin: 10px;
 `;
 
 const Content = styled.div`
@@ -129,7 +123,6 @@ const Content = styled.div`
 const Img = styled.img`
   width: 330px;
   height: 330px;
-  /* background-color: beige; */
   margin: 10px;
   object-fit: cover;
 `;

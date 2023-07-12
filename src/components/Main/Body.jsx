@@ -4,22 +4,26 @@ import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../api/posts";
 import { useQuery } from "react-query";
 import TopButton from "../feature/TopButton";
+import Button from "../Button";
 
 function Body() {
   const navigate = useNavigate();
   const { data } = useQuery("posts", getPosts);
-
+  const writePostHandle = () => {
+    navigate(`/postWrite`);
+  };
   return (
     <>
       <ContentsLayout>
         <BtnArea>
-          <PostWriteBtn
+          <Button onClick={writePostHandle} name={"리뷰하기"}></Button>
+          {/* <PostWriteBtn
             onClick={() => {
               navigate(`/postWrite`);
             }}
-          >
+          
             리뷰하러가기🍴
-          </PostWriteBtn>
+          </PostWriteBtn> */}
         </BtnArea>
         {data &&
           data.map((post) => {
@@ -49,6 +53,7 @@ function Body() {
 export default Body;
 const BtnArea = styled.div`
   width: 100%;
+  text-align: right;
 `;
 
 const PostWriteBtn = styled.button`
