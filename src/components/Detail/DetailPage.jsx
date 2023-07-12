@@ -5,6 +5,7 @@ import { getPosts, delPost } from "../../api/posts";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
+import Modal from "../../components/Modal";
 
 function DetailPage() {
   const navigate = useNavigate();
@@ -26,11 +27,11 @@ function DetailPage() {
   const serviceGrade = "⭐️".repeat(foundPost.serviceGrade);
   const priceGrade = "⭐️".repeat(foundPost.priceGrade);
 
-  const openModal = () => {
+  const openModalHandle = () => {
     setIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModalHandle = () => {
     setIsOpen(false);
     deleteMutation.mutate(foundPost.id);
     navigate("/");
@@ -64,22 +65,14 @@ function DetailPage() {
             {foundPost.content}
           </Content>
           <DeleteBtnBox>
-            <Button onClick={openModal} name={"삭제하기"}></Button>
+            <Button onClick={openModalHandle} name={"삭제하기"}></Button>
           </DeleteBtnBox>
-          {
-            //isOpen이 true일때만 활성화되게
-            isOpen && (
-              <OuterBox>
-                <InnerBox>
-                  <p>삭제하시겠습니까?</p>
-                  <ModalBtnArea>
-                    <StBtn onClick={closeModal}> 네 </StBtn>
-                    <StBtn onClick={deleteCancelHandle}>아니요</StBtn>
-                  </ModalBtnArea>
-                </InnerBox>
-              </OuterBox>
-            )
-          }
+          {isOpen && (
+            <Modal
+              closeModal={closeModalHandle}
+              deleteCancel={deleteCancelHandle}
+            ></Modal>
+          )}
           <EditBtnBox>
             <Button onClick={modifyPost} name={"수정하기"}></Button>
           </EditBtnBox>
@@ -90,50 +83,6 @@ function DetailPage() {
 }
 
 export default DetailPage;
-
-const ModalBtnArea = styled.div`
-  position: relative;
-  top: 90px;
-  left: 235px;
-`;
-const OuterBox = styled.div`
-  //모달창을 감싸는 젤 바깥쪽 div
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const InnerBox = styled.div`
-  //모달창을 감싸는 젤 안쪽 div
-  background-color: #fff;
-  padding: 20px;
-  width: 30%;
-  height: 25%;
-  border-radius: 12px;
-`;
-
-const StBtn = styled.button`
-  //그냥 버튼 스타일링
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  background-color: #97919171;
-  color: rgb(0, 0, 0);
-  width: 80px;
-  height: 40px;
-  margin-right: 10px;
-  &:hover {
-    background-color: #979191f1;
-    color: white;
-    border: none;
-  }
-`;
 
 const RestaurantInfoBox = styled.span`
   background-color: #9791912f;
@@ -154,8 +103,8 @@ const GradeBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 20px;
-  padding: 5px 0 0 20px;
   border-radius: 5px;
   margin-bottom: 10px;
 `;

@@ -139,25 +139,65 @@ function Edit() {
           value={content}
           onChange={setContentHandle}
         />
-        <ImgAddInput
-          type="file"
-          accept="image/*"
-          name="img"
-          onChange={fileOnLoad}
-          ref={testRef}
-        />
-        {/* <img src={imgUrl}></img> */}
-        <BtnArea>
-          <Button name={"수정하기"}></Button>
-          <Button onClick={canelHandle} name={"취소하기"}></Button>
-        </BtnArea>
+        <BottomBox>
+          <SelectImgBox>
+            <Img src={imgUrl}></Img>
+            <FileLabel for="fileImg">
+              이미지 바꾸기
+              <ImgAddInput
+                type="file"
+                id="fileImg"
+                accept="image/*"
+                name="img"
+                onChange={fileOnLoad}
+                style={{ display: "none" }}
+                ref={testRef}
+              />
+            </FileLabel>
+          </SelectImgBox>
+          <BtnArea>
+            <Button name={"수정하기"}></Button>
+            <Button onClick={canelHandle} name={"취소하기"}></Button>
+          </BtnArea>
+        </BottomBox>
       </form>
     </WriteLayout>
   );
 }
 
 export default Edit;
+const SelectImgBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const BottomBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+const FileLabel = styled.label`
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 8px;
+  width: 120px;
+  border-radius: 5px;
+  height: 40px;
+  border: none;
+  background-color: #97919171;
+  &:hover {
+    background-color: #979191f1;
+    color: white;
+  }
+`;
 
+const Img = styled.img`
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  object-fit: cover;
+`;
 const ImgAddInput = styled.input`
   width: 50%;
   outline: none;
@@ -192,7 +232,7 @@ const SelectBox = styled.div`
   font-size: 18px;
 `;
 const BtnArea = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
   right: 0;
 `;

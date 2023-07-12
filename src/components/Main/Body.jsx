@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../../api/posts";
 import { useQuery } from "react-query";
-import TopButton from "../feature/TopButton";
 import Button from "../Button";
 
 function Body() {
@@ -38,7 +37,6 @@ function Body() {
             );
           })}
       </ContentsLayout>
-      {/* <TopButton /> */}
     </>
   );
 }
@@ -62,6 +60,7 @@ const PostWriteBtn = styled.button`
     cursor: pointer;
   }
 `;
+
 const Writer = styled.p`
   color: white;
   font-size: 18px;
@@ -111,7 +110,7 @@ const ContentImg = styled.img`
 `;
 
 const ContentContainer = styled.div`
-  width: calc(30%);
+  width: calc(30.2%);
   aspect-ratio: 6 / 5;
   position: relative;
   overflow: hidden;
@@ -130,18 +129,15 @@ const ContentContainer = styled.div`
     opacity: 0;
     transition: 0.4s ease-in-out;
   }
-
   &:hover::after {
     opacity: 1;
   }
-
   ${ContentInfoBox} {
     &:hover {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
   ${ContentImg} {
     &:hover {
       transform: scale(1.1);

@@ -1,9 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import 헤더2 from "../../assets/헤더2.jpeg";
+
 function Header() {
-  const navigate = useNavigate();
   return (
     <HeaderLayout>
       <TitleBox>
