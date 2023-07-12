@@ -72,7 +72,7 @@ function Write() {
 
   return (
     <WriteLayout>
-      <form onSubmit={SubmitBtnHandle}>
+      <FormContainer onSubmit={SubmitBtnHandle}>
         <div>
           <InputName
             required
@@ -126,13 +126,18 @@ function Write() {
           value={content}
           onChange={setContentHandle}
         />
-        <ImgAddInput
-          type="file"
-          accept="image/*"
-          name="img"
-          onChange={fileOnLoad}
-          ref={testRef}
-        />
+        <FileLabel for="fileImg">
+          이미지 넣기
+          <ImgAddInput
+            type="file"
+            id="fileImg"
+            accept="image/*"
+            name="img"
+            onChange={fileOnLoad}
+            style={{ display: "none" }}
+            ref={testRef}
+          />
+        </FileLabel>
         <BtnArea>
           <Btn type="submit">작성하기</Btn>
           <Btn
@@ -144,12 +149,33 @@ function Write() {
             취소하기
           </Btn>
         </BtnArea>
-      </form>
+      </FormContainer>
     </WriteLayout>
   );
 }
 
 export default Write;
+const FormContainer = styled.form`
+  height: 700px;
+`;
+
+const FileLabel = styled.label`
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  width: 100px;
+  border-radius: 5px;
+  height: 40px;
+  border: none;
+  background-color: #97919171;
+  &:hover {
+    background-color: #979191f1;
+    color: white;
+  }
+`;
+
 const RestaurantLocationInput = styled.input`
   width: 50%;
   height: 50px;

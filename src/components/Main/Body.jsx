@@ -17,13 +17,6 @@ function Body() {
       <ContentsLayout>
         <BtnArea>
           <Button onClick={writePostHandle} name={"리뷰하기"}></Button>
-          {/* <PostWriteBtn
-            onClick={() => {
-              navigate(`/postWrite`);
-            }}
-          
-            리뷰하러가기🍴
-          </PostWriteBtn> */}
         </BtnArea>
         {data &&
           data.map((post) => {
