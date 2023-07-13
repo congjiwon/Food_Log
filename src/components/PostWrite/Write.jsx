@@ -128,18 +128,22 @@ function Write() {
           value={content}
           onChange={setContentHandle}
         />
-        <FileLabel for="fileImg">
-          이미지 넣기
-          <ImgAddInput
-            type="file"
-            id="fileImg"
-            accept="image/*"
-            name="img"
-            onChange={fileOnLoad}
-            style={{ display: "none" }}
-            ref={testRef}
-          />
-        </FileLabel>
+        <SelectImgBox>
+          {imgUrl && <Img src={imgUrl}></Img>}
+          <FileLabel for="fileImg">
+            이미지 넣기
+            <ImgAddInput
+              type="file"
+              id="fileImg"
+              accept="image/*"
+              name="img"
+              onChange={fileOnLoad}
+              style={{ display: "none" }}
+              ref={testRef}
+            />
+          </FileLabel>
+        </SelectImgBox>
+
         <BtnArea>
           <Btn type="submit">작성하기</Btn>
           <Btn
@@ -157,6 +161,18 @@ function Write() {
 }
 
 export default Write;
+const SelectImgBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Img = styled.img`
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  object-fit: cover;
+`;
+
 const FormContainer = styled.form`
   height: 700px;
 `;
