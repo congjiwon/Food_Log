@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import 헤더2 from "../../assets/헤더2.jpeg";
+import header from "../../assets/header.jpeg";
 
 function Header() {
   return (
@@ -46,5 +46,5 @@ const HeaderLayout = styled.header`
   background-color: #f2ead3;
   width: 100%;
   height: 300px;
-  background-image: url("${헤더2}");
+  background-image: url("${header}");
 `;
