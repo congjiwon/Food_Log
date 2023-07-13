@@ -11,9 +11,9 @@ function Footer() {
         powered by &nbsp;
         <FooterLink
           target="_blank"
-          to="https://github.com/DHyeonJ/React_NewsFeed"
+          to="https://github.com/congjiwon/Food_Log.git"
         >
-          깃허브 주소 넣기
+          깃허브 바로가기
         </FooterLink>
       </FootertParagraph>
     </FooterLayout>

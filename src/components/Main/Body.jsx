@@ -12,8 +12,7 @@ function Body() {
   const writePostHandle = () => {
     navigate(`/postWrite`);
   };
-  // const dataReverse = data.reverse();
-  // console.log
+
   return (
     <Layout>
       <BtnArea>
@@ -53,23 +52,10 @@ const Layout = styled.div`
   display: row;
   justify-content: center;
 `;
+
 const BtnArea = styled.div`
   text-align: right;
   margin: 20px 10% 0 0;
-`;
-
-const PostWriteBtn = styled.button`
-  margin-top: 40px;
-  margin-left: 1060px;
-  background-color: #c3a27e;
-  color: white;
-  width: 130px;
-  height: 40px;
-  border-radius: 5px;
-  &:hover {
-    background-color: #61462b;
-    cursor: pointer;
-  }
 `;
 
 const Writer = styled.p`
@@ -123,9 +109,7 @@ const ContentImg = styled.img`
 `;
 
 const ContentContainer = styled.div`
-  /* max-width: calc(30.2%); */
   width: 370px;
-  /* min-width: 20%; */
   aspect-ratio: 6 / 5;
   position: relative;
   overflow: hidden;
