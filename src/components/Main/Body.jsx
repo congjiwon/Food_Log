@@ -12,12 +12,14 @@ function Body() {
   const writePostHandle = () => {
     navigate(`/postWrite`);
   };
+  // const dataReverse = data.reverse();
+  // console.log
   return (
-    <>
+    <Layout>
+      <BtnArea>
+        <Button onClick={writePostHandle} name={"리뷰하기"}></Button>
+      </BtnArea>
       <ContentsLayout>
-        <BtnArea>
-          <Button onClick={writePostHandle} name={"리뷰하기"}></Button>
-        </BtnArea>
         {data &&
           data.map((post) => {
             return (
@@ -40,14 +42,20 @@ function Body() {
             );
           })}
       </ContentsLayout>
-    </>
+    </Layout>
   );
 }
 
 export default Body;
-const BtnArea = styled.div`
+const Layout = styled.div`
   width: 100%;
+  height: 100%;
+  display: row;
+  justify-content: center;
+`;
+const BtnArea = styled.div`
   text-align: right;
+  margin: 20px 10% 0 0;
 `;
 
 const PostWriteBtn = styled.button`
@@ -93,12 +101,14 @@ const ContentInfoBox = styled.div`
 `;
 
 const ContentsLayout = styled.section`
-  margin: 40px 0 80px;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 30px;
   display: flex;
   flex-direction: row;
   gap: 55px;
-  justify-content: flex-start;
   flex-wrap: wrap;
+  max-width: 1500px;
 `;
 
 const ContentImgBox = styled.div`
@@ -113,7 +123,9 @@ const ContentImg = styled.img`
 `;
 
 const ContentContainer = styled.div`
-  width: calc(30.2%);
+  /* max-width: calc(30.2%); */
+  width: 370px;
+  /* min-width: 20%; */
   aspect-ratio: 6 / 5;
   position: relative;
   overflow: hidden;

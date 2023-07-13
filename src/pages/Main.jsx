@@ -9,9 +9,9 @@ function Main() {
   return (
     <>
       <Header />
-      <Layout>
-        <Body />
-      </Layout>
+      {/* <Layout> */}
+      <Body />
+      {/* </Layout> */}
       <TopButton />
       <Footer />
     </>
