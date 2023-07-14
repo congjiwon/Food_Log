@@ -7,7 +7,6 @@ import { useMutation, useQueryClient } from "react-query";
 import shortid from "shortid";
 import currentTime from "../feature/CurrentTime";
 import Select from "../PostWrite/Select";
-import noimage from "../../assets/noimage.jpg";
 
 function Write() {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ function Write() {
   const [priceGrade, setPriceGrade] = useState();
   const [restaurantName, setRestaurantNameHandle] = useInput();
   const [restaurantLocation, setRestaurantLocationHandle] = useInput();
-
+  const [password, setPasswordHandle] = useInput();
   const [imgUrl, setImgUrl] = useState("");
   const testRef = useRef();
 
@@ -65,6 +64,7 @@ function Write() {
       priceGrade,
       restaurantName,
       restaurantLocation,
+      password,
     };
 
     mutation.mutate(newPost);
@@ -130,7 +130,7 @@ function Write() {
         />
         <SelectImgBox>
           {imgUrl && <Img src={imgUrl}></Img>}
-          <FileLabel for="fileImg">
+          <FileLabel htmlFor="fileImg">
             이미지 넣기
             <ImgAddInput
               type="file"
@@ -143,8 +143,14 @@ function Write() {
             />
           </FileLabel>
         </SelectImgBox>
-
         <BtnArea>
+          <PasswordInput
+            type="password"
+            required
+            value={password}
+            onChange={setPasswordHandle}
+            placeholder="비밀번호를 입력하세요"
+          ></PasswordInput>
           <Btn type="submit">작성하기</Btn>
           <Btn
             type="submit"
@@ -161,6 +167,16 @@ function Write() {
 }
 
 export default Write;
+
+const PasswordInput = styled.input`
+  width: 230px;
+  height: 50px;
+  padding: 10px;
+  border: 0.5px solid #dcdcdc;
+  font-size: 18px;
+  outline: none;
+`;
+
 const SelectImgBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -217,16 +233,16 @@ const SelectBox = styled.div`
   align-items: center;
   gap: 30px;
   height: 50px;
-  /* padding: 20px; */
   border: 0.5px solid #dcdcdc;
   font-size: 18px;
-  /* outline: none; */
 `;
+
 const BtnArea = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   right: 0;
 `;
+
 const Btn = styled.button`
   background-color: #97919171;
   color: black;

@@ -6,10 +6,13 @@ import { editPost, getPosts } from "../../api/posts";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Select from "../PostWrite/Select";
 import Button from "../Button";
+import Modal from "../../components/Modal";
 
 function Edit() {
   const params = useParams();
   const { data } = useQuery("posts", getPosts);
+  const [isOpen, setIsOpen] = useState(false);
+
   const foundPost = data.find((post) => {
     return post.id === params.id;
   });
@@ -28,6 +31,16 @@ function Edit() {
   const [restaurantLocation, setRestaurantLocationHandle] = useInput(
     foundPost.restaurantLocation
   );
+
+  const openModalHandle = () => {
+    setIsOpen(true);
+  };
+
+  const closeModalHandle = () => {
+    setIsOpen(false);
+    // deleteMutation.mutate(foundPost.id);
+    // navigate("/");
+  };
 
   const [imgUrl, setImgUrl] = useState(foundPost.imgUrl);
   const testRef = useRef();
@@ -141,8 +154,8 @@ function Edit() {
         />
         <BottomBox>
           <SelectImgBox>
-            <Img src={imgUrl}></Img>
-            <FileLabel for="fileImg">
+            {imgUrl && <Img src={imgUrl}></Img>}
+            <FileLabel htmlFor="fileImg">
               이미지 바꾸기
               <ImgAddInput
                 type="file"

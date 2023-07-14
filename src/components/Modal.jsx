@@ -1,16 +1,35 @@
 import React from "react";
 import { styled } from "styled-components";
+import useInput from "../hooks/useInput";
+import { useNavigate } from "react-router-dom";
+
 function Modal(props) {
-  const { closeModal, deleteCancel } = props;
+  const { closeModal, cancel, children, correctPassword } = props;
+  const [password, setPasswordHandle] = useInput();
+  const navigate = useNavigate();
+
+  const checkPasswordHandle = () => {
+    if (password == correctPassword) {
+      closeModal();
+    } else {
+      alert("비밀번호가 틀립니다");
+    }
+  };
   return (
     <>
       {
         <ModalOuterBox>
           <ModalInnerBox>
-            <p>삭제하시겠습니까?</p>
+            <p>{children} 비밀번호를 입력해주세요</p>
+            <PasswordInput
+              type="password"
+              value={password}
+              onChange={setPasswordHandle}
+              placeholder="비밀번호 입력"
+            ></PasswordInput>
             <ModalBtnArea>
-              <Btn onClick={closeModal}> 네 </Btn>
-              <Btn onClick={deleteCancel}>아니요</Btn>
+              <Btn onClick={checkPasswordHandle}> 입력 </Btn>
+              <Btn onClick={cancel}>취소</Btn>
             </ModalBtnArea>
           </ModalInnerBox>
         </ModalOuterBox>
@@ -20,11 +39,23 @@ function Modal(props) {
 }
 
 export default Modal;
+
+const PasswordInput = styled.input`
+  width: 230px;
+  height: 50px;
+  padding: 10px;
+  border: 0.5px solid #dcdcdc;
+  font-size: 18px;
+  outline: none;
+  margin-top: 30px;
+`;
+
 const ModalBtnArea = styled.div`
   position: relative;
   text-align: right;
-  margin-top: 90px;
+  margin-top: 50px;
 `;
+
 const ModalOuterBox = styled.div`
   position: fixed;
   top: 0;
@@ -40,9 +71,13 @@ const ModalOuterBox = styled.div`
 const ModalInnerBox = styled.div`
   background-color: #fff;
   padding: 20px;
-  width: 30%;
-  height: 25%;
+  min-width: 30%;
+  min-height: 28%;
+  max-width: 30%;
+  max-height: 25%;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Btn = styled.button`

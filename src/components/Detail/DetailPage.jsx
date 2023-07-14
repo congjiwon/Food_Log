@@ -11,7 +11,9 @@ function DetailPage() {
   const navigate = useNavigate();
   const params = useParams();
   const { data } = useQuery("posts", getPosts);
-  const [isOpen, setIsOpen] = useState(false);
+  const [deletModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [ModifyModalIsOpen, setModifyModalIsOpen] = useState(false);
+
   const queryClient = useQueryClient();
   const deleteMutation = useMutation(delPost, {
     onSuccess: () => {
@@ -27,22 +29,42 @@ function DetailPage() {
   const serviceGrade = "⭐️".repeat(foundPost.serviceGrade);
   const priceGrade = "⭐️".repeat(foundPost.priceGrade);
 
-  const openModalHandle = () => {
-    setIsOpen(true);
+  const openModalHandle = (caseMessage) => {
+    switch (caseMessage) {
+      case "delete":
+        setDeleteModalIsOpen(true);
+        break;
+      case "modify":
+        setModifyModalIsOpen(true);
+        break;
+    }
   };
 
-  const closeModalHandle = () => {
-    setIsOpen(false);
-    deleteMutation.mutate(foundPost.id);
-    navigate("/");
+  const actionValidationHandle = (caseMessage) => {
+    switch (caseMessage) {
+      case "delete":
+        setDeleteModalIsOpen(false);
+        deleteMutation.mutate(foundPost.id);
+        navigate("/");
+        break;
+      case "modify":
+        setModifyModalIsOpen(false);
+        navigate(`/editpage/${foundPost.id}`);
+        break;
+    }
   };
 
-  const modifyPost = () => {
-    navigate(`/editpage/${foundPost.id}`);
+  const actionInValidationHandle = (caseMessage) => {
+    switch (caseMessage) {
+      case "delete":
+        setDeleteModalIsOpen(false);
+        break;
+      case "modify":
+        setModifyModalIsOpen(false);
+        break;
+    }
   };
-  const deleteCancelHandle = () => {
-    navigate("/");
-  };
+
   return (
     <DetailLayout>
       <DetailPostBox>
@@ -65,17 +87,35 @@ function DetailPage() {
             {foundPost.content}
           </Content>
           <DeleteBtnBox>
-            <Button onClick={openModalHandle} name={"삭제하기"}></Button>
+            <Button
+              onClick={() => openModalHandle("delete")}
+              name={"삭제하기"}
+            ></Button>
           </DeleteBtnBox>
-          {isOpen && (
+          {deletModalIsOpen && (
             <Modal
-              closeModal={closeModalHandle}
-              deleteCancel={deleteCancelHandle}
-            ></Modal>
+              closeModal={() => actionValidationHandle("delete")}
+              cancel={() => actionInValidationHandle("delete")}
+              correctPassword={foundPost.password}
+            >
+              삭제하시려면
+            </Modal>
           )}
           <EditBtnBox>
-            <Button onClick={modifyPost} name={"수정하기"}></Button>
+            <Button
+              onClick={() => openModalHandle("modify")}
+              name={"수정하기"}
+            ></Button>
           </EditBtnBox>
+          {ModifyModalIsOpen && (
+            <Modal
+              closeModal={() => actionValidationHandle("modify")}
+              cancel={() => actionInValidationHandle("modify")}
+              correctPassword={foundPost.password}
+            >
+              수정하시려면
+            </Modal>
+          )}
         </ContentsBox>
       </DetailPostBox>
     </DetailLayout>
